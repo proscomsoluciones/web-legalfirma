@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDownIcon,
   ClipboardDocumentCheckIcon,
@@ -47,43 +48,64 @@ export default function PreguntasFrecuentes() {
   return (
     <section
       id="faq"
-      className="py-16 sm:py-24 bg-white text-gray-900 scroll-mt-24 border-b border-gray-200"
+      className="py-20 sm:py-28 bg-white text-gray-900 scroll-mt-24 border-b border-gray-200 overflow-hidden"
     >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span className="text-[#a2172b] font-semibold text-xs sm:text-sm tracking-wider uppercase mb-2 block text-center">
-          Dudas Comunes
-        </span>
-        <h2 className="text-2xl sm:text-4xl font-extrabold text-center mb-4 text-[#a2172b]">
-          Preguntas Frecuentes
-        </h2>
-        <p className="text-center mb-10 sm:mb-14 text-gray-600 text-base sm:text-lg">
-          Respuestas claras a las dudas más habituales sobre nuestros servicios.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <span className="text-[#a2172b] font-bold text-xs sm:text-sm tracking-widest uppercase mb-2 block">
+            Dudas Comunes
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-[#a2172b] tracking-tight">
+            Preguntas Frecuentes
+          </h2>
+          <p className="mb-12 sm:mb-14 text-gray-600 text-base sm:text-lg">
+            Respuestas claras a las dudas más habituales sobre nuestros servicios.
+          </p>
+        </motion.div>
 
-        <div className="space-y-3.5 sm:space-y-4">
+        {/* Acordeón interactivo con framer-motion */}
+        <div className="space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             const Icon = faq.icon;
             return (
-              <div
+              <motion.div
                 key={index}
-                className={`bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-200 border ${
-                  isOpen ? "border-[#a2172b]/40 ring-1 ring-[#a2172b]/20" : "border-gray-200 hover:border-gray-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className={`bg-white rounded-2xl shadow-sm overflow-hidden transition-colors border ${
+                  isOpen
+                    ? "border-[#a2172b]/50 ring-1 ring-[#a2172b]/20 shadow-md"
+                    : "border-gray-200 hover:border-gray-300"
                 }`}
               >
                 <button
                   type="button"
-                  className={`w-full flex justify-between items-center p-4 sm:p-5 text-left font-medium focus:outline-none transition-colors ${
-                    isOpen ? "bg-red-50/50" : "hover:bg-gray-50/80"
+                  className={`w-full flex justify-between items-center p-4 sm:p-5 text-left font-medium focus:outline-none transition-colors cursor-pointer ${
+                    isOpen ? "bg-red-50/60" : "hover:bg-gray-50/90"
                   }`}
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={isOpen}
                 >
-                  <div className="flex items-center gap-3 sm:gap-4 pr-2">
-                    <div className="p-2 bg-red-100/50 rounded-lg text-[#a2172b] flex-shrink-0">
+                  <div className="flex items-center gap-3.5 sm:gap-4 pr-2">
+                    <div
+                      className={`p-2.5 rounded-xl transition-colors duration-300 ${
+                        isOpen
+                          ? "bg-[#a2172b] text-white"
+                          : "bg-red-100/50 text-[#a2172b]"
+                      }`}
+                    >
                       <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <span className="text-sm sm:text-base font-semibold text-gray-900">
+                    <span className="text-sm sm:text-base font-bold text-gray-900">
                       {faq.q}
                     </span>
                   </div>
@@ -94,12 +116,22 @@ export default function PreguntasFrecuentes() {
                   />
                 </button>
 
-                {isOpen && (
-                  <div className="px-5 pb-5 pt-2 text-gray-600 text-sm sm:text-base border-t border-red-100/40 bg-red-50/20">
-                    <p className="leading-relaxed">{faq.a}</p>
-                  </div>
-                )}
-              </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden bg-red-50/20 border-t border-red-100/50"
+                    >
+                      <div className="px-5 py-4 text-gray-600 text-sm sm:text-base leading-relaxed pl-14 sm:pl-16">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>
