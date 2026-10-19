@@ -98,27 +98,25 @@ export default function Simulador() {
               </div>
             </div>
 
-            {/* Botones de acción */}
+            {/* Botones de acción siempre visibles */}
             <div className="flex gap-3">
               <button
                 type="submit"
-                className="flex-1 bg-[#a2172b] hover:bg-[#851222] text-white py-3.5 px-6 rounded-xl font-semibold shadow-md transition-all text-base sm:text-lg transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                className="flex-1 bg-[#a2172b] hover:bg-[#851222] text-white py-3.5 px-4 sm:px-6 rounded-xl font-semibold shadow-md transition-all text-base sm:text-lg transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 Calcular Total
               </button>
 
-              {(tasacion || resultado !== null) && (
-                <button
-                  type="button"
-                  onClick={handleLimpiar}
-                  className="px-4 py-3.5 rounded-xl border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold transition-all flex items-center justify-center gap-1.5 text-sm sm:text-base cursor-pointer"
-                  title="Reiniciar simulador"
-                  aria-label="Reiniciar simulador"
-                >
-                  <ArrowPathIcon className="w-5 h-5" />
-                  <span className="hidden sm:inline">Limpiar</span>
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={handleLimpiar}
+                className="px-4 sm:px-5 py-3.5 rounded-xl border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold transition-all flex items-center justify-center gap-1.5 text-sm sm:text-base cursor-pointer shadow-sm hover:border-gray-400 active:bg-gray-300"
+                title="Limpiar simulador"
+                aria-label="Limpiar simulador"
+              >
+                <ArrowPathIcon className="w-5 h-5 text-gray-600" />
+                <span>Limpiar</span>
+              </button>
             </div>
           </form>
 
