@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section
-      id="hero"
+      id="inicio"
       className="relative w-full min-h-screen flex items-center justify-center text-center px-4 sm:px-6 md:px-12 pt-24 pb-16 md:py-32 overflow-hidden scroll-mt-24"
     >
       {/* Imagen de fondo */}

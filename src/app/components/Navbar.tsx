@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const LINKS = [
-  { name: "Inicio", href: "#hero" },
+  { name: "Inicio", href: "#inicio" },
   { name: "Nosotros", href: "#nosotros" },
   { name: "Servicios", href: "#servicios" },
   { name: "Simulador", href: "#simulador" },
@@ -15,8 +16,19 @@ const LINKS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
+  const [activeSection, setActiveSection] = useState("inicio");
   const [scrolled, setScrolled] = useState(false);
+
+  // Ir al inicio suavemente y mantener la URL limpia sin #hero ni #inicio
+  const handleGoToTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (window.location.hash) {
+      window.history.pushState(null, "", window.location.pathname);
+    }
+    setActiveSection("inicio");
+    setMenuOpen(false);
+  };
 
   // Bloquear scroll de fondo al abrir menú móvil
   useEffect(() => {
@@ -35,6 +47,13 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
       const scrollPos = window.scrollY + 120;
+
+      // Si está arriba de todo, marcar inicio
+      if (window.scrollY < 150) {
+        setActiveSection("inicio");
+        return;
+      }
+
       LINKS.forEach((link) => {
         const section = document.querySelector(link.href);
         if (section instanceof HTMLElement) {
@@ -64,11 +83,12 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 sm:h-20">
-          {/* Logo interactivo */}
-          <a
-            href="#hero"
-            className="flex-shrink-0 flex items-center transition-all duration-300 hover:scale-105 active:scale-95"
-            aria-label="Ir a inicio"
+          {/* Logo interactivo hacia inicio limpio */}
+          <Link
+            href="/"
+            onClick={handleGoToTop}
+            className="flex-shrink-0 flex items-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+            aria-label="Ir a inicio de Legal Firma"
           >
             <Image
               src="/img/logo/legal_firma_logo.png"
@@ -78,7 +98,7 @@ export default function Navbar() {
               priority
               className="w-auto h-12 sm:h-16 md:h-18 object-contain drop-shadow-[0_4px_12px_rgba(255,255,255,0.15)] transition-transform duration-300"
             />
-          </a>
+          </Link>
 
           {/* Desktop Menu con microinteracciones */}
           <nav
@@ -86,26 +106,46 @@ export default function Navbar() {
             className="hidden md:flex items-center gap-5 lg:gap-7 text-white font-medium text-sm lg:text-base"
           >
             {LINKS.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
+              const isInicio = link.name === "Inicio";
+              const isActive = activeSection === (isInicio ? "inicio" : link.href.substring(1));
+              const linkClasses = `relative py-1.5 transition-colors duration-200 group text-sm lg:text-base cursor-pointer ${
+                isActive
+                  ? "text-[#e23b50] font-semibold"
+                  : "text-gray-300 hover:text-white"
+              }`;
+
+              const underlineSpan = (
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 bg-[#a2172b] transition-all duration-300 rounded-full ${
+                    isActive
+                      ? "w-full"
+                      : "w-0 group-hover:w-full opacity-0 group-hover:opacity-100"
+                  }`}
+                />
+              );
+
+              if (isInicio) {
+                return (
+                  <Link
+                    key={link.name}
+                    href="/"
+                    onClick={handleGoToTop}
+                    className={linkClasses}
+                  >
+                    {link.name}
+                    {underlineSpan}
+                  </Link>
+                );
+              }
+
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`relative py-1.5 transition-colors duration-200 group text-sm lg:text-base ${
-                    isActive
-                      ? "text-[#e23b50] font-semibold"
-                      : "text-gray-300 hover:text-white"
-                  }`}
+                  className={linkClasses}
                 >
                   {link.name}
-                  {/* Micro barra animada inferior */}
-                  <span
-                    className={`absolute bottom-0 left-0 h-0.5 bg-[#a2172b] transition-all duration-300 rounded-full ${
-                      isActive
-                        ? "w-full"
-                        : "w-0 group-hover:w-full opacity-0 group-hover:opacity-100"
-                    }`}
-                  />
+                  {underlineSpan}
                 </a>
               );
             })}
@@ -113,7 +153,7 @@ export default function Navbar() {
             {/* Botón Contacto con brillo en hover */}
             <a
               href="#contacto"
-              className="relative overflow-hidden group bg-gradient-to-r from-[#a2172b] to-[#c21f37] hover:from-[#b51930] hover:to-[#a2172b] text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg shadow-red-950/40 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-red-800/50 active:translate-y-0"
+              className="relative overflow-hidden group bg-gradient-to-r from-[#a2172b] to-[#c21f37] hover:from-[#b51930] hover:to-[#a2172b] text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg shadow-red-950/40 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-red-800/50 active:translate-y-0 cursor-pointer"
             >
               <span className="relative z-10 flex items-center gap-1.5">
                 <span>Contacto</span>
@@ -125,10 +165,10 @@ export default function Navbar() {
             </a>
           </nav>
 
-          {/* Botón menú hamburguesa con microinteracción */}
+          {/* Botón menú hamburguesa */}
           <button
             type="button"
-            className="md:hidden text-white p-2.5 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="md:hidden text-white p-2.5 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Cerrar menú" : "Abrir menú de navegación"}
             aria-expanded={menuOpen}
@@ -168,7 +208,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Menú móvil desplegable con backdrop blur y transiciones suaves */}
+      {/* Menú móvil desplegable */}
       <div
         className={`fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl md:hidden flex flex-col justify-between p-6 transition-all duration-300 ease-in-out ${
           menuOpen
@@ -187,7 +227,7 @@ export default function Navbar() {
           />
           <button
             type="button"
-            className="text-white p-2.5 rounded-xl bg-white/10 active:scale-95 transition-all focus:outline-none"
+            className="text-white p-2.5 rounded-xl bg-white/10 active:scale-95 transition-all focus:outline-none cursor-pointer"
             onClick={() => setMenuOpen(false)}
             aria-label="Cerrar menú"
           >
@@ -211,16 +251,32 @@ export default function Navbar() {
         {/* Links móviles con animaciones táctiles */}
         <div className="flex flex-col items-center justify-center gap-4 my-auto overflow-y-auto py-6">
           {LINKS.map((link) => {
-            const isActive = activeSection === link.href.substring(1);
+            const isInicio = link.name === "Inicio";
+            const isActive = activeSection === (isInicio ? "inicio" : link.href.substring(1));
+            const mobileClasses = `text-lg font-medium transition-all py-2.5 px-6 rounded-xl text-center w-full max-w-xs cursor-pointer ${
+              isActive
+                ? "bg-[#a2172b]/20 text-[#e23b50] font-bold border border-[#a2172b]/30"
+                : "text-white hover:bg-white/10 active:scale-98"
+            }`;
+
+            if (isInicio) {
+              return (
+                <Link
+                  key={link.name}
+                  href="/"
+                  className={mobileClasses}
+                  onClick={handleGoToTop}
+                >
+                  {link.name}
+                </Link>
+              );
+            }
+
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className={`text-lg font-medium transition-all py-2.5 px-6 rounded-xl text-center w-full max-w-xs ${
-                  isActive
-                    ? "bg-[#a2172b]/20 text-[#e23b50] font-bold border border-[#a2172b]/30"
-                    : "text-white hover:bg-white/10 active:scale-98"
-                }`}
+                className={mobileClasses}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.name}
@@ -233,7 +289,7 @@ export default function Navbar() {
         <div className="w-full pt-4 border-t border-white/10 flex justify-center">
           <a
             href="#contacto"
-            className="w-full max-w-sm bg-gradient-to-r from-[#a2172b] to-[#c21f37] text-white py-3.5 rounded-xl font-semibold shadow-lg text-center text-lg active:scale-98 transition-transform"
+            className="w-full max-w-sm bg-gradient-to-r from-[#a2172b] to-[#c21f37] text-white py-3.5 rounded-xl font-semibold shadow-lg text-center text-lg active:scale-98 transition-transform cursor-pointer"
             onClick={() => setMenuOpen(false)}
           >
             Contacto Inmediato →
