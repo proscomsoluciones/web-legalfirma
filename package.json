@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
-    "export": "next export",
     "lint": "eslint"
   },
   "dependencies": {
@@ -32,6 +31,7 @@
     "typescript": "^5"
   },
   "optionalDependencies": {
-    "lightningcss-darwin-arm64": "^1.30.1"
+    "lightningcss-darwin-arm64": "^1.30.1",
+    "lightningcss-linux-x64-gnu": "^1.33.0"
   }
 }
