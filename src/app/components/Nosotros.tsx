@@ -21,10 +21,10 @@ export default function Nosotros() {
         </h2>
 
         <p className="max-w-3xl mx-auto text-gray-700 text-base sm:text-xl mb-12 sm:mb-16 leading-relaxed">
-          En <span className="font-semibold text-gray-900">Legal Firma</span> presentamos nuestros servicios para que los trámites de venta o
-          transferencia de vehículos sean simples, rápidos y claros. Nos
-          encargamos de todo, desde la firma hasta el seguimiento, para que tú no
-          tengas que preocuparte.
+          En <span className="font-semibold text-gray-900">Legal Firma</span> presentamos nuestros servicios para que la compraventa y
+          transferencia de vehículos en <strong className="text-gray-900 font-semibold">Rancagua, Rengo y la Región de O&apos;Higgins</strong> sean
+          trámites simples, rápidos y claros. Nos encargamos de todo, desde la
+          firma digital hasta el seguimiento, sin filas ni complicaciones.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left">

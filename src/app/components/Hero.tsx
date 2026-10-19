@@ -23,16 +23,18 @@ export default function Hero() {
       {/* Contenido centrado y adaptable */}
       <div className="relative z-10 flex flex-col items-center justify-center gap-5 sm:gap-6 text-white max-w-4xl mx-auto">
         <span className="inline-block py-1 px-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide uppercase bg-white/10 backdrop-blur-md border border-white/20 text-gray-200 animate-fadeUp">
-          Trámites Ágiles y Seguros en Chile
+          Rancagua • Rengo • Región de O&apos;Higgins
         </span>
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight animate-fadeUp">
-          Bienvenido a <span className="text-[#e23b50]">Legal Firma</span>
+          Transferencia de Vehículos en{" "}
+          <span className="text-[#e23b50]">Rancagua y Rengo</span>
         </h1>
 
-        <p className="text-base sm:text-xl md:text-2xl text-gray-200 max-w-2xl font-light leading-relaxed animate-fadeUp delay-150">
-          Soluciones innovadoras para tu vehículo y negocio: firma electrónica
-          avanzada y gestión rápida de transferencias vehiculares.
+        <p className="text-base sm:text-xl md:text-2xl text-gray-200 max-w-3xl font-light leading-relaxed animate-fadeUp delay-150">
+          Soluciones ágiles para compraventa y trámites de vehículos en la Región
+          de O&apos;Higgins: transferencia rápida de autos con firma electrónica
+          avanzada y total respaldo legal.
         </p>
 
         <div className="mt-2 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center justify-center animate-fadeUp delay-300">

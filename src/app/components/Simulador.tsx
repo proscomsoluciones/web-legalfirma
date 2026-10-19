@@ -1,10 +1,15 @@
 "use client";
-import { useState } from "react";
-import { CalculatorIcon } from "@heroicons/react/24/outline";
+import { useState, useRef } from "react";
+import {
+  CalculatorIcon,
+  XMarkIcon,
+  ArrowPathIcon,
+} from "@heroicons/react/24/outline";
 
 export default function Simulador() {
   const [tasacion, setTasacion] = useState("");
   const [resultado, setResultado] = useState<number | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const formatoCLP = (valor: number) =>
     valor.toLocaleString("es-CL", { style: "currency", currency: "CLP" });
@@ -28,6 +33,12 @@ export default function Simulador() {
     // Impuesto a la transferencia (1.5%) + aranceles notariales / operativos
     const calculo = monto * 0.015 + 36100 + 49000;
     setResultado(calculo);
+  };
+
+  const handleLimpiar = () => {
+    setTasacion("");
+    setResultado(null);
+    inputRef.current?.focus();
   };
 
   return (
@@ -60,36 +71,82 @@ export default function Simulador() {
               >
                 Monto de Tasación (CLP)
               </label>
-              <input
-                id="tasacion-input"
-                type="text"
-                inputMode="numeric"
-                placeholder="$ Ej: 5.000.000"
-                value={tasacion ? formatoCLP(Number(tasacion)) : ""}
-                onChange={handleInputChange}
-                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3.5 text-base sm:text-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a2172b] focus:border-transparent transition-all"
-              />
+
+              {/* Input con botón de borrado rápido integrado */}
+              <div className="relative flex items-center">
+                <input
+                  ref={inputRef}
+                  id="tasacion-input"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="$ Ej: 5.000.000"
+                  value={tasacion ? formatoCLP(Number(tasacion)) : ""}
+                  onChange={handleInputChange}
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl pl-4 pr-11 py-3.5 text-base sm:text-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a2172b] focus:border-transparent transition-all font-medium"
+                />
+                {tasacion && (
+                  <button
+                    type="button"
+                    onClick={handleLimpiar}
+                    className="absolute right-3 p-1.5 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-200 transition-colors focus:outline-none"
+                    aria-label="Borrar monto"
+                    title="Borrar monto"
+                  >
+                    <XMarkIcon className="w-5 h-5" />
+                  </button>
+                )}
+              </div>
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-[#a2172b] hover:bg-[#851222] text-white py-3.5 px-6 rounded-xl font-semibold shadow-md transition-all text-base sm:text-lg transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-            >
-              Calcular Total
-            </button>
+            {/* Botones de acción */}
+            <div className="flex gap-3">
+              <button
+                type="submit"
+                className="flex-1 bg-[#a2172b] hover:bg-[#851222] text-white py-3.5 px-6 rounded-xl font-semibold shadow-md transition-all text-base sm:text-lg transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              >
+                Calcular Total
+              </button>
+
+              {(tasacion || resultado !== null) && (
+                <button
+                  type="button"
+                  onClick={handleLimpiar}
+                  className="px-4 py-3.5 rounded-xl border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold transition-all flex items-center justify-center gap-1.5 text-sm sm:text-base cursor-pointer"
+                  title="Reiniciar simulador"
+                  aria-label="Reiniciar simulador"
+                >
+                  <ArrowPathIcon className="w-5 h-5" />
+                  <span className="hidden sm:inline">Limpiar</span>
+                </button>
+              )}
+            </div>
           </form>
 
           {resultado !== null && (
-            <div className="mt-2 p-4 bg-red-50/70 border border-red-200 rounded-xl">
+            <div className="mt-2 p-5 bg-red-50/70 border border-red-200 rounded-2xl animate-fadeUp">
               <p className="text-gray-600 text-xs sm:text-sm mb-1">
                 Total estimado a pagar:
               </p>
-              <p className="text-2xl sm:text-3xl font-extrabold text-[#a2172b]">
+              <p className="text-3xl sm:text-4xl font-extrabold text-[#a2172b] tracking-tight">
                 {formatoCLP(resultado)}
               </p>
               <p className="text-xs text-gray-500 mt-2">
                 * Incluye impuesto 1.5% + aranceles operativos y notariales estimados.
               </p>
+
+              {/* Botón directo para cotizar por WhatsApp con el monto ya calculado */}
+              <a
+                href={`https://wa.me/56984369223?text=${encodeURIComponent(
+                  `Hola, realicé la simulación para un auto de tasación ${formatoCLP(
+                    Number(tasacion)
+                  )} (Total estimado: ${formatoCLP(resultado)}). ¿Cómo iniciamos la transferencia?`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center w-full bg-[#25D366] hover:bg-[#1EBE5D] text-white py-2.5 px-4 rounded-xl font-semibold text-sm transition-all shadow-sm"
+              >
+                Transferir por este monto en WhatsApp →
+              </a>
             </div>
           )}
         </div>

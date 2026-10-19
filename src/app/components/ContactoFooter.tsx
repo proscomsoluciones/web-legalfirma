@@ -35,10 +35,10 @@ export default function ContactoFooter() {
     },
     {
       icon: MapPinIcon,
-      title: "Ubicación",
-      text: "Malloa, Chile",
-      link: "https://maps.google.com/?q=Malloa,Chile",
-      action: "Ver mapa",
+      title: "Cobertura",
+      text: "Rancagua, Rengo y Región de O'Higgins",
+      link: "https://maps.google.com/?q=Rancagua,Chile",
+      action: "Ver cobertura",
     },
   ];
 
@@ -59,7 +59,7 @@ export default function ContactoFooter() {
           Contáctanos
         </h2>
         <p className="text-center text-gray-600 text-base sm:text-lg max-w-2xl mx-auto mb-10 sm:mb-14">
-          Comunícate con nuestro equipo legal por el canal que te resulte más cómodo.
+          Comunícate con nuestro equipo legal para la transferencia rápida de tu auto en Rancagua, Rengo y toda la Región de O&apos;Higgins.
         </p>
 
         {/* Bloques de contacto responsivos */}

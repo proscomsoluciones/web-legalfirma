@@ -22,9 +22,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Legal Firma | Transferencia de Vehículos y Trámites Ágiles",
+  title: "Legal Firma | Transferencia de Vehículos en Rancagua y Rengo",
   description:
-    "Servicios profesionales de transferencia de vehículos, contratos digitales y firma electrónica avanzada en Chile.",
+    "Especialistas en transferencia rápida de autos y vehículos en Rancagua, Rengo y la Región de O'Higgins. Trámites de compraventa vehicular seguros con firma electrónica.",
 };
 
 export default function RootLayout({
