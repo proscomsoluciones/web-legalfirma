@@ -41,9 +41,13 @@ export default function Servicios() {
   return (
     <section
       id="servicios"
-      className="py-20 sm:py-28 bg-white text-center scroll-mt-24 border-b border-gray-200 overflow-hidden"
+      className="relative py-20 sm:py-28 bg-white bg-grid-pattern text-center scroll-mt-24 border-b border-gray-200/80 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Halos de luz ambiental */}
+      <div className="absolute top-1/2 -right-32 w-[500px] h-[500px] bg-[#a2172b]/4 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-red-100/40 rounded-full blur-2xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +69,7 @@ export default function Servicios() {
           </p>
         </motion.div>
 
-        {/* Tarjetas interactivas con animación escalonada */}
+        {/* Tarjetas interactivas sobre fondo texturizado */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {servicios.map((s, index) => {
             const Icon = s.icon;
@@ -82,12 +86,12 @@ export default function Servicios() {
                 }}
                 whileHover={{
                   y: -10,
-                  boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.08)",
+                  boxShadow: "0 25px 35px -10px rgba(0, 0, 0, 0.1)",
                 }}
-                className="relative bg-gray-50/80 hover:bg-white rounded-2xl border border-gray-200/90 p-7 shadow-sm transition-all duration-300 flex flex-col justify-between items-center text-center group cursor-pointer hover:border-red-300"
+                className="relative bg-white/95 backdrop-blur-md rounded-3xl border border-gray-200/80 p-7 shadow-sm transition-all duration-300 flex flex-col justify-between items-center text-center group cursor-pointer hover:border-red-300"
               >
                 {/* Badge flotante */}
-                <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-red-100/70 text-[#a2172b] group-hover:bg-[#a2172b] group-hover:text-white transition-colors">
+                <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-red-100/70 text-[#a2172b] group-hover:bg-[#a2172b] group-hover:text-white transition-colors shadow-xs">
                   {s.badge}
                 </span>
 

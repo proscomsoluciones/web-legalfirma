@@ -43,9 +43,13 @@ export default function PorQueElegirnos() {
   return (
     <section
       id="porque-elegirnos"
-      className="py-20 sm:py-28 bg-white text-center scroll-mt-24 border-b border-gray-200 overflow-hidden"
+      className="relative py-20 sm:py-28 bg-white bg-grid-pattern text-center scroll-mt-24 border-b border-gray-200/80 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Halos de luz ambiental */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#a2172b]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[#a2172b]/4 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}

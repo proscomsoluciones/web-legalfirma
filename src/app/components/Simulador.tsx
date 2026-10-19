@@ -62,9 +62,12 @@ export default function Simulador() {
   return (
     <section
       id="simulador"
-      className="py-20 sm:py-28 bg-gradient-to-b from-gray-50 via-white to-gray-50 text-center scroll-mt-24 border-b border-gray-200 overflow-hidden"
+      className="relative py-20 sm:py-28 bg-gradient-to-b from-gray-50 via-white to-gray-50 bg-dot-pattern text-center scroll-mt-24 border-b border-gray-200/80 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Halo de luz central que ilumina la calculadora */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#a2172b]/6 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,13 +86,13 @@ export default function Simulador() {
           </p>
         </motion.div>
 
-        {/* Tarjeta del Simulador con animación de entrada */}
+        {/* Tarjeta del Simulador con efecto de elevación y cristal */}
         <motion.div
           initial={{ opacity: 0, scale: 0.94, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-lg mx-auto bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 p-6 sm:p-9 flex flex-col gap-6 relative"
+          className="max-w-lg mx-auto bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl shadow-gray-300/40 border border-gray-100 p-6 sm:p-9 flex flex-col gap-6 relative"
         >
           {/* Icono flotante con pulso */}
           <div className="relative mx-auto">
@@ -110,9 +113,9 @@ export default function Simulador() {
                   key={m}
                   type="button"
                   onClick={() => handleQuickSelect(m)}
-                  className={`text-xs py-2 px-2.5 rounded-xl border transition-all font-semibold ${
+                  className={`text-xs py-2 px-2.5 rounded-xl border transition-all font-semibold cursor-pointer ${
                     tasacion === m.toString()
-                      ? "bg-[#a2172b] text-white border-[#a2172b] shadow-sm"
+                      ? "bg-[#a2172b] text-white border-[#a2172b] shadow-sm scale-102"
                       : "bg-gray-50 hover:bg-red-50 text-gray-700 hover:text-[#a2172b] border-gray-200"
                   }`}
                 >
@@ -131,7 +134,7 @@ export default function Simulador() {
                 Monto de Tasación (CLP)
               </label>
 
-              {/* Input interactivo con botón de borrado rápido */}
+              {/* Input interactivo */}
               <div className="relative flex items-center">
                 <input
                   ref={inputRef}
@@ -141,7 +144,7 @@ export default function Simulador() {
                   placeholder="$ Ej: 5.000.000"
                   value={tasacion ? formatoCLP(Number(tasacion)) : ""}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-50 border border-gray-300 rounded-xl pl-4 pr-11 py-3.5 text-base sm:text-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a2172b] focus:border-transparent transition-all font-medium shadow-inner"
+                  className="w-full bg-gray-50/80 border border-gray-300 rounded-xl pl-4 pr-11 py-3.5 text-base sm:text-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a2172b] focus:border-transparent transition-all font-medium shadow-inner"
                 />
                 {tasacion && (
                   <button
@@ -220,7 +223,7 @@ export default function Simulador() {
                   </span>
                 </div>
 
-                {/* Botón directo a WhatsApp con microinteracción */}
+                {/* Botón directo a WhatsApp */}
                 <motion.a
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}

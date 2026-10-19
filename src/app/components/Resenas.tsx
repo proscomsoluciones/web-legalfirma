@@ -46,9 +46,13 @@ export default function Reseñas() {
   return (
     <section
       id="resenas"
-      className="py-20 sm:py-28 bg-gradient-to-b from-gray-50 via-white to-gray-50 text-center scroll-mt-24 border-b border-gray-200 overflow-hidden"
+      className="relative py-20 sm:py-28 bg-gradient-to-b from-gray-50/90 via-white to-gray-50/90 bg-dot-pattern text-center scroll-mt-24 border-b border-gray-200/80 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Halos de luz ambiental */}
+      <div className="absolute top-1/3 -right-24 w-96 h-96 bg-[#a2172b]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 -left-24 w-80 h-80 bg-red-100/30 rounded-full blur-2xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}

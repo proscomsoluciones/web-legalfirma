@@ -29,10 +29,14 @@ export default function Nosotros() {
   return (
     <section
       id="nosotros"
-      className="py-20 sm:py-28 bg-gradient-to-b from-gray-50 via-white to-gray-50 text-center scroll-mt-24 border-b border-gray-200 overflow-hidden"
+      className="relative py-20 sm:py-28 bg-gradient-to-b from-gray-50/80 via-white to-gray-50/80 bg-dot-pattern text-center scroll-mt-24 border-b border-gray-200/80 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Encabezado animado al llegar a la sección */}
+      {/* Halos de luz ambiental difusa (Modern LegalTech Glows) */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#a2172b]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#a2172b]/4 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Encabezado animado */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,13 +52,13 @@ export default function Nosotros() {
 
           <p className="max-w-3xl mx-auto text-gray-700 text-base sm:text-xl mb-14 leading-relaxed">
             En <span className="font-semibold text-gray-900">Legal Firma</span> presentamos nuestros servicios para que la compraventa y
-            transferencia de vehículos en <strong className="text-gray-900 font-semibold">Rancagua, Rengo y la Región de O&apos;Higgins</strong> sean
+            transferencia de vehículos en <strong className="text-gray-900 font-semibold">Rancagua, Rengo, la Región de O&apos;Higgins y todo Chile</strong> sean
             trámites simples, rápidos y claros. Nos encargamos de todo, desde la
             firma digital hasta el seguimiento, sin filas ni complicaciones.
           </p>
         </motion.div>
 
-        {/* Tarjetas que se arman secuencialmente (Staggered Build-in) */}
+        {/* Tarjetas con elevación sobre textura */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left">
           {cards.map((card, index) => {
             const Icon = card.icon;
@@ -73,11 +77,11 @@ export default function Nosotros() {
                   y: -8,
                   boxShadow: "0 20px 30px -10px rgba(162, 23, 43, 0.12)",
                 }}
-                className={`bg-white rounded-2xl shadow-sm border border-gray-100 p-7 sm:p-8 transition-all duration-300 flex flex-col items-center sm:items-start gap-4 hover:border-red-200/80 group ${
+                className={`bg-white/95 backdrop-blur-md rounded-3xl shadow-md shadow-gray-200/50 border border-gray-100 p-7 sm:p-8 transition-all duration-300 flex flex-col items-center sm:items-start gap-4 hover:border-red-200/80 group ${
                   index === 2 ? "sm:col-span-2 lg:col-span-1" : ""
                 }`}
               >
-                <div className="p-3.5 bg-red-50 rounded-2xl group-hover:bg-[#a2172b] transition-colors duration-300 transform group-hover:scale-110">
+                <div className="p-3.5 bg-red-50 rounded-2xl group-hover:bg-[#a2172b] transition-colors duration-300 transform group-hover:scale-110 shadow-sm">
                   <Icon className="w-8 h-8 text-[#a2172b] group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 text-center sm:text-left group-hover:text-[#a2172b] transition-colors">
@@ -91,7 +95,7 @@ export default function Nosotros() {
           })}
         </div>
 
-        {/* CTA con microinteracción de pulsación */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

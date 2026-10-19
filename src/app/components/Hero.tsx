@@ -18,7 +18,9 @@ export default function Hero() {
           className="object-cover object-center"
         />
         {/* Overlay oscuro */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/65"></div>
+        {/* Textura sutil moderna en Hero */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
       </div>
 
       {/* Contenido original */}
