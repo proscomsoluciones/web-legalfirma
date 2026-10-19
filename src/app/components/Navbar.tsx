@@ -63,10 +63,10 @@ export default function Navbar() {
             <Image
               src="/img/logo/legal_firma_logo.png"
               alt="Logo Legal Firma"
-              width={140}
-              height={44}
+              width={185}
+              height={58}
               priority
-              className="w-auto h-9 sm:h-11 md:h-12 object-contain"
+              className="w-auto h-12 sm:h-14 md:h-16 object-contain"
             />
           </a>
 
@@ -156,9 +156,9 @@ export default function Navbar() {
           <Image
             src="/img/logo/legal_firma_logo.png"
             alt="Logo Legal Firma"
-            width={120}
-            height={38}
-            className="w-auto h-8 object-contain"
+            width={160}
+            height={50}
+            className="w-auto h-11 object-contain"
           />
           <button
             type="button"
