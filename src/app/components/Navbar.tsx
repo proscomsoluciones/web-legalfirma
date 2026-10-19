@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-// ✅ Mover los links fuera del componente (ya que no cambian)
 const LINKS = [
   { name: "Inicio", href: "#hero" },
   { name: "Nosotros", href: "#nosotros" },
@@ -14,23 +13,24 @@ const LINKS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [animateMenu, setAnimateMenu] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
 
-  // ✅ Animación del menú móvil
+  // Bloquear scroll de fondo al abrir menú móvil
   useEffect(() => {
     if (menuOpen) {
-      setAnimateMenu(true);
+      document.body.style.overflow = "hidden";
     } else {
-      const timer = setTimeout(() => setAnimateMenu(false), 300);
-      return () => clearTimeout(timer);
+      document.body.style.overflow = "unset";
     }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [menuOpen]);
 
-  // ✅ ScrollSpy
+  // ScrollSpy
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 150; // Ajusta según altura navbar
+      const scrollPos = window.scrollY + 120;
       LINKS.forEach((link) => {
         const section = document.querySelector(link.href);
         if (section instanceof HTMLElement) {
@@ -44,62 +44,73 @@ export default function Navbar() {
       });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []); // ✅ Ya no hay warning
+  }, []);
 
   return (
     <>
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-32">
+      {/* Barra de Navegación */}
+      <header className="fixed top-0 left-0 w-full z-40 bg-black/90 backdrop-blur-md transition-all duration-300 border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20 md:h-24">
           {/* Logo */}
           <a
             href="#hero"
-            className="flex-shrink-0 max-w-[120px] md:max-w-[150px]"
+            className="flex-shrink-0 flex items-center transition-opacity hover:opacity-90"
+            aria-label="Ir a inicio"
           >
-            <img
+            <Image
               src="/img/logo/legal_firma_logo.png"
-              alt="Logo"
-              width={130}
-              height={40}
-              className="w-full h-auto object-contain"
+              alt="Logo Legal Firma"
+              width={140}
+              height={44}
+              priority
+              className="w-auto h-9 sm:h-11 md:h-12 object-contain"
             />
           </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8 text-white font-medium">
-            {LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`hover:text-[#a2172b] transition-colors duration-300 ${
-                  activeSection === link.href.substring(1)
-                    ? "text-[#a2172b]"
-                    : ""
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
+          <nav
+            aria-label="Navegación principal"
+            className="hidden md:flex items-center gap-5 lg:gap-8 text-white font-medium text-sm lg:text-base"
+          >
+            {LINKS.map((link) => {
+              const isActive = activeSection === link.href.substring(1);
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`transition-colors duration-200 py-1 border-b-2 ${
+                    isActive
+                      ? "text-[#a2172b] border-[#a2172b]"
+                      : "border-transparent text-gray-200 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
             <a
               href="#contacto"
-              className="bg-[#a2172b] hover:bg-red-800 text-white px-6 py-2 rounded-lg font-semibold shadow-md transition-all"
+              className="bg-[#a2172b] hover:bg-[#851222] text-white px-5 py-2.5 rounded-lg font-semibold shadow-md transition-all transform hover:-translate-y-0.5 active:translate-y-0"
             >
               Contacto
             </a>
-          </div>
+          </nav>
 
-          {/* Mobile Hamburger */}
+          {/* Botón menú hamburguesa (móvil) */}
           <button
-            className="md:hidden text-white focus:outline-none"
+            type="button"
+            className="md:hidden text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú de navegación"}
+            aria-expanded={menuOpen}
           >
             {menuOpen ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
+                className="h-7 w-7"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -114,7 +125,7 @@ export default function Navbar() {
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
+                className="h-7 w-7"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -129,25 +140,35 @@ export default function Navbar() {
             )}
           </button>
         </div>
-      </nav>
+      </header>
 
-      {/* Mobile Menu */}
-      {animateMenu && (
-        <div
-          className={`fixed inset-0 z-50 bg-black flex flex-col items-center justify-center gap-8 text-xl transition-transform duration-300 ${
-            menuOpen
-              ? "translate-x-0 opacity-100"
-              : "translate-x-full opacity-0"
-          }`}
-        >
-          {/* Cerrar */}
+      {/* Menú móvil desplegable */}
+      <div
+        className={`fixed inset-0 z-50 bg-black/95 backdrop-blur-xl md:hidden flex flex-col justify-between p-6 transition-all duration-300 ease-in-out ${
+          menuOpen
+            ? "opacity-100 pointer-events-auto translate-x-0"
+            : "opacity-0 pointer-events-none translate-x-full"
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        {/* Cabecera del menú móvil */}
+        <div className="flex justify-between items-center pb-4 border-b border-white/10">
+          <Image
+            src="/img/logo/legal_firma_logo.png"
+            alt="Logo Legal Firma"
+            width={120}
+            height={38}
+            className="w-auto h-8 object-contain"
+          />
           <button
-            className="absolute top-6 right-6 text-white p-2 focus:outline-none"
+            type="button"
+            className="text-white p-2 rounded-lg hover:bg-white/10 focus:outline-none"
             onClick={() => setMenuOpen(false)}
+            aria-label="Cerrar menú"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
+              className="h-7 w-7"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -160,33 +181,40 @@ export default function Navbar() {
               />
             </svg>
           </button>
+        </div>
 
-          {/* Links */}
-          {LINKS.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`transition-colors duration-300 text-center w-full py-4 hover:text-[#a2172b] ${
-                activeSection === link.href.substring(1)
-                  ? "text-[#a2172b]"
-                  : "text-white"
-              }`}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.name}
-            </a>
-          ))}
+        {/* Links móviles */}
+        <div className="flex flex-col items-center justify-center gap-5 my-auto overflow-y-auto py-6">
+          {LINKS.map((link) => {
+            const isActive = activeSection === link.href.substring(1);
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`text-xl font-medium transition-colors py-2 px-4 rounded-lg text-center ${
+                  isActive
+                    ? "text-[#a2172b] font-bold"
+                    : "text-white hover:text-gray-300"
+                }`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            );
+          })}
+        </div>
 
-          {/* Botón Contacto */}
+        {/* Botón CTA móvil */}
+        <div className="w-full pt-4 border-t border-white/10 flex justify-center">
           <a
             href="#contacto"
-            className="bg-[#a2172b] hover:bg-red-800 text-white px-8 py-3 rounded-lg font-semibold shadow-md transition-all w-full text-center"
+            className="w-full max-w-sm bg-[#a2172b] hover:bg-[#851222] text-white py-3.5 rounded-xl font-semibold shadow-lg text-center text-lg transition-colors"
             onClick={() => setMenuOpen(false)}
           >
-            Contacto
+            Contacto Inmediato
           </a>
         </div>
-      )}
+      </div>
     </>
   );
 }

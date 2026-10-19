@@ -12,13 +12,13 @@ export default function PorQueElegirnos() {
     {
       title: "Rápido y Personalizado",
       description:
-        "Atendemos tus dudas de inmediato y te ayudamos en cada paso del trámite.",
+        "Atendemos tus dudas de inmediato y te acompañamos paso a paso durante el trámite.",
       icon: ClockIcon,
     },
     {
-      title: "Certificado de Transferencia por WhatsApp",
+      title: "Certificado por WhatsApp",
       description:
-        "Recibe tu certificado de manera digital y segura directamente en tu teléfono.",
+        "Recibe tu comprobante de transferencia seguro y digital directamente en tu teléfono.",
       icon: DocumentCheckIcon,
     },
     {
@@ -29,7 +29,8 @@ export default function PorQueElegirnos() {
     },
     {
       title: "Asistencia Amigable",
-      description: "Te guiamos paso a paso con un trato cercano y profesional.",
+      description:
+        "Te guiamos con claridad, cercanía y el más alto rigor legal en cada etapa.",
       icon: ChatBubbleBottomCenterTextIcon,
     },
   ];
@@ -37,46 +38,53 @@ export default function PorQueElegirnos() {
   return (
     <section
       id="porque-elegirnos"
-      className="py-20 px-6 sm:px-20 bg-white text-center scroll-mt-32"
+      className="py-16 sm:py-24 bg-white text-center scroll-mt-24 border-b border-gray-200"
     >
-      {/* Título */}
-      <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-gray-900">
-        ¿Por qué Elegirnos?
-      </h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span className="text-[#a2172b] font-semibold text-xs sm:text-sm tracking-wider uppercase mb-2 block">
+          Nuestras Ventajas
+        </span>
+        <h2 className="text-2xl sm:text-4xl font-extrabold mb-6 text-gray-900">
+          ¿Por qué Elegirnos?
+        </h2>
 
-      {/* Texto introductorio */}
-      <p className="max-w-3xl mx-auto text-gray-700 text-lg sm:text-xl mb-12">
-        En <span className="font-semibold text-[#a2172b]">Legal Firma</span>,
-        hacemos que los trámites para vender o transferir un vehículo sean
-        simples, rápidos y claros. Nos encargamos de todo, desde la firma hasta
-        el seguimiento, para que tú no tengas que preocuparte.
-      </p>
+        <p className="max-w-3xl mx-auto text-gray-700 text-base sm:text-xl mb-12 sm:mb-16 leading-relaxed">
+          En <span className="font-semibold text-[#a2172b]">Legal Firma</span>,
+          hacemos que comprar, vender o transferir un vehículo sea un proceso
+          transparente, cómodo y sin demoras burocráticas.
+        </p>
 
-      {/* Tarjetas con razones */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {razones.map((r) => {
-          const Icon = r.icon;
-          return (
-            <div
-              key={r.title}
-              className="bg-white rounded-lg shadow-lg p-6 transition transform hover:-translate-y-2 hover:shadow-2xl flex flex-col items-center gap-4"
-            >
-              <Icon className="w-12 h-12 text-[#a2172b] transition-transform duration-300 hover:scale-110" />
-              <h3 className="text-xl font-semibold text-gray-900">{r.title}</h3>
-              <p className="text-gray-700 text-center">{r.description}</p>
-            </div>
-          );
-        })}
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {razones.map((r) => {
+            const Icon = r.icon;
+            return (
+              <div
+                key={r.title}
+                className="bg-gray-50 rounded-2xl border border-gray-200/80 p-6 sm:p-7 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col items-center text-center group"
+              >
+                <div className="p-3.5 bg-red-100/60 rounded-xl mb-5 group-hover:bg-[#a2172b] transition-colors duration-300">
+                  <Icon className="w-8 h-8 text-[#a2172b] group-hover:text-white transition-colors duration-300" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                  {r.title}
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                  {r.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
 
-      {/* Botón CTA */}
-      <div className="mt-12">
-        <a
-          href="#contacto"
-          className="inline-block bg-[#a2172b] hover:bg-red-800 text-white px-8 py-3 rounded-lg font-semibold shadow-md transition-all text-lg"
-        >
-          Contáctanos
-        </a>
+        {/* Botón CTA */}
+        <div className="mt-12 sm:mt-16">
+          <a
+            href="#contacto"
+            className="inline-block bg-[#a2172b] hover:bg-[#851222] text-white px-8 py-3.5 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all text-base sm:text-lg transform hover:-translate-y-0.5 active:translate-y-0"
+          >
+            Iniciar Trámite
+          </a>
+        </div>
       </div>
     </section>
   );

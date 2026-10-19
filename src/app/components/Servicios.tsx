@@ -11,23 +11,23 @@ export default function Servicios() {
   const servicios = [
     {
       title: "Transferencia de Vehículos",
-      description: "Incluye contrato digital y firma electrónica.",
+      description: "Gestión completa con contrato digital y firma electrónica con validez legal.",
       icon: TruckIcon,
     },
     {
-      title: "Mandato con poder especial",
+      title: "Mandato con Poder Especial",
       description:
-        "Documento que da total autoridad para representar a otra persona.",
+        "Documento con total autoridad legal para representar a otra persona en el trámite.",
       icon: DocumentTextIcon,
     },
     {
-      title: "Permiso para sacar el auto del país",
-      description: "Necesario si el vehículo va a cruzar fronteras.",
+      title: "Permiso de Salida del País",
+      description: "Autorización notarial y legal si el vehículo va a cruzar fronteras nacionales.",
       icon: ShieldCheckIcon,
     },
     {
-      title: "Gestión de trámites rápidos",
-      description: "Simplificamos todos tus procesos de manera segura.",
+      title: "Gestión de Trámites Rápidos",
+      description: "Simplificamos y aceleramos tus gestiones vehiculares sin filas ni complicaciones.",
       icon: ArrowPathIcon,
     },
   ];
@@ -35,47 +35,55 @@ export default function Servicios() {
   return (
     <section
       id="servicios"
-      className="py-20 px-6 sm:px-20 bg-gray-100 text-center scroll-mt-32"
+      className="py-16 sm:py-24 bg-white text-center scroll-mt-24 border-b border-gray-200"
     >
-      {/* Título */}
-      <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-gray-900">
-        Nuestros Servicios
-      </h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span className="text-[#a2172b] font-semibold text-xs sm:text-sm tracking-wider uppercase mb-2 block">
+          Lo que hacemos
+        </span>
+        <h2 className="text-2xl sm:text-4xl font-extrabold mb-6 text-gray-900">
+          Nuestros Servicios
+        </h2>
 
-      {/* Texto introductorio */}
-      <p className="max-w-3xl mx-auto text-gray-700 text-lg sm:text-xl mb-12">
-        En <span className="font-semibold text-[#a2172b]">Legal Firma</span>,
-        transformamos los trámites complejos en procesos simples y rápidos.
-        Descubre nuestros servicios diseñados para que vender, transferir o
-        gestionar tu vehículo sea una experiencia clara, segura y sin
-        complicaciones.
-      </p>
+        <p className="max-w-3xl mx-auto text-gray-700 text-base sm:text-xl mb-12 sm:mb-16 leading-relaxed">
+          En <span className="font-semibold text-[#a2172b]">Legal Firma</span>,
+          transformamos los trámites complejos en procesos simples y rápidos.
+          Descubre nuestros servicios diseñados para que vender, transferir o
+          gestionar tu vehículo sea una experiencia segura y sin demoras.
+        </p>
 
-      {/* Tarjetas de servicios */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {servicios.map((s) => {
-          const Icon = s.icon;
-          return (
-            <div
-              key={s.title}
-              className="bg-white rounded-lg shadow-lg p-6 transition transform hover:-translate-y-2 hover:shadow-2xl flex flex-col items-center gap-4"
-            >
-              <Icon className="w-12 h-12 text-[#a2172b] transition-transform duration-300 hover:scale-110" />
-              <h3 className="text-xl font-semibold text-gray-900">{s.title}</h3>
-              <p className="text-gray-700 text-center">{s.description}</p>
-            </div>
-          );
-        })}
-      </div>
+        {/* Tarjetas de servicios */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {servicios.map((s) => {
+            const Icon = s.icon;
+            return (
+              <div
+                key={s.title}
+                className="bg-gray-50 rounded-2xl border border-gray-200/80 p-6 sm:p-7 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col items-center text-center group"
+              >
+                <div className="p-3.5 bg-red-100/60 rounded-xl mb-5 group-hover:bg-[#a2172b] transition-colors duration-300">
+                  <Icon className="w-8 h-8 text-[#a2172b] group-hover:text-white transition-colors duration-300" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                  {s.title}
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                  {s.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
 
-      {/* Botón CTA */}
-      <div className="mt-12">
-        <a
-          href="#contacto"
-          className="inline-block bg-[#a2172b] hover:bg-red-800 text-white px-8 py-3 rounded-lg font-semibold shadow-md transition-all text-lg"
-        >
-          Contáctanos
-        </a>
+        {/* Botón CTA */}
+        <div className="mt-12 sm:mt-16">
+          <a
+            href="#contacto"
+            className="inline-block bg-[#a2172b] hover:bg-[#851222] text-white px-8 py-3.5 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all text-base sm:text-lg transform hover:-translate-y-0.5 active:translate-y-0"
+          >
+            Solicitar Servicio
+          </a>
+        </div>
       </div>
     </section>
   );

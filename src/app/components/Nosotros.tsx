@@ -10,75 +10,71 @@ export default function Nosotros() {
   return (
     <section
       id="nosotros"
-      className="py-20 px-6 sm:px-20 bg-gray-50 text-center scroll-mt-32"
+      className="py-16 sm:py-24 bg-gray-50 text-center scroll-mt-24 border-b border-gray-200"
     >
-      <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-gray-900 animate-fadeUp">
-        Sobre Nosotros
-      </h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span className="text-[#a2172b] font-semibold text-xs sm:text-sm tracking-wider uppercase mb-2 block">
+          Quiénes Somos
+        </span>
+        <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-6">
+          Sobre Nosotros
+        </h2>
 
-      <p className="max-w-3xl mx-auto text-gray-700 text-lg sm:text-xl animate-fadeUp delay-150 mb-12">
-        Legal Firma presenta sus servicios para que los trámites de venta o
-        transferencia de vehículos sean simples, rápidos y claros. Nos
-        encargamos de todo, desde la firma hasta el seguimiento, para que tú no
-        tengas que preocuparte.
-      </p>
+        <p className="max-w-3xl mx-auto text-gray-700 text-base sm:text-xl mb-12 sm:mb-16 leading-relaxed">
+          En <span className="font-semibold text-gray-900">Legal Firma</span> presentamos nuestros servicios para que los trámites de venta o
+          transferencia de vehículos sean simples, rápidos y claros. Nos
+          encargamos de todo, desde la firma hasta el seguimiento, para que tú no
+          tengas que preocuparte.
+        </p>
 
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div className="bg-white rounded-lg shadow-lg p-6 transition transform hover:-translate-y-2 hover:shadow-2xl flex flex-col items-center gap-4">
-          <AcademicCapIcon className="w-12 h-12 text-[#a2172b]" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            Profesionalismo
-          </h3>
-          <p className="text-gray-700 text-center">
-            Excelencia y confiabilidad en cada proyecto que asumimos.
-          </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left">
+          <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl p-6 sm:p-8 transition-all duration-300 border border-gray-100 flex flex-col items-center sm:items-start gap-4">
+            <div className="p-3 bg-red-50 rounded-xl">
+              <AcademicCapIcon className="w-8 h-8 sm:w-10 sm:h-10 text-[#a2172b]" />
+            </div>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 text-center sm:text-left">
+              Profesionalismo
+            </h3>
+            <p className="text-gray-600 text-sm sm:text-base text-center sm:text-left leading-relaxed">
+              Excelencia y confiabilidad legal en cada trámite que gestionamos para ti.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl p-6 sm:p-8 transition-all duration-300 border border-gray-100 flex flex-col items-center sm:items-start gap-4">
+            <div className="p-3 bg-red-50 rounded-xl">
+              <LightBulbIcon className="w-8 h-8 sm:w-10 sm:h-10 text-[#a2172b]" />
+            </div>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 text-center sm:text-left">
+              Innovación
+            </h3>
+            <p className="text-gray-600 text-sm sm:text-base text-center sm:text-left leading-relaxed">
+              Incorporamos tecnología y firma electrónica avanzada para simplificar procesos.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl p-6 sm:p-8 transition-all duration-300 border border-gray-100 flex flex-col items-center sm:items-start gap-4 sm:col-span-2 lg:col-span-1">
+            <div className="p-3 bg-red-50 rounded-xl">
+              <ChatBubbleLeftIcon className="w-8 h-8 sm:w-10 sm:h-10 text-[#a2172b]" />
+            </div>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 text-center sm:text-left">
+              Soporte Continuo
+            </h3>
+            <p className="text-gray-600 text-sm sm:text-base text-center sm:text-left leading-relaxed">
+              Atención rápida, humana y personalizada para cada consulta o necesidad.
+            </p>
+          </div>
         </div>
-        <div className="bg-white rounded-lg shadow-lg p-6 transition transform hover:-translate-y-2 hover:shadow-2xl flex flex-col items-center gap-4">
-          <LightBulbIcon className="w-12 h-12 text-[#a2172b]" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            Innovación
-          </h3>
-          <p className="text-gray-700 text-center">
-            Incorporamos tecnología avanzada para simplificar procesos.
-          </p>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg p-6 transition transform hover:-translate-y-2 hover:shadow-2xl flex flex-col items-center gap-4">
-          <ChatBubbleLeftIcon className="w-12 h-12 text-[#a2172b]" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">Soporte</h3>
-          <p className="text-gray-700 text-center">
-            Atención rápida y personalizada para cada consulta o trámite.
-          </p>
+
+        {/* CTA */}
+        <div className="mt-12 sm:mt-16">
+          <a
+            href="#contacto"
+            className="inline-block bg-[#a2172b] hover:bg-[#851222] text-white px-8 py-3.5 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-base sm:text-lg"
+          >
+            Contáctanos hoy
+          </a>
         </div>
       </div>
-
-      {/* CTA */}
-      <div className="mt-12">
-        <a
-          href="#contacto"
-          className="inline-block bg-[#a2172b] hover:bg-red-800 text-white px-8 py-3 rounded-lg font-semibold shadow-md transition-all"
-        >
-          Contáctanos
-        </a>
-      </div>
-
-      <style jsx>{`
-        @keyframes fadeUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadeUp {
-          animation: fadeUp 0.8s ease forwards;
-        }
-        .delay-150 {
-          animation-delay: 0.15s;
-        }
-      `}</style>
     </section>
   );
 }

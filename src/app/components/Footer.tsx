@@ -1,20 +1,28 @@
 "use client";
-export default function Footer() {
-  const corporateColor = "#a2172b";
 
+export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-100">
-      {/* Footer legal */}
-      <div className="border-t border-gray-700 mt-6 text-center py-4 text-gray-400 text-sm">
-        &copy; {new Date().getFullYear()} Legal firma. Todos los derechos
-        reservados. <br />
-        Sitio desarrollado por{" "}
-        <a
-          href="https://proscom.cl"
-          className="hover:text-red-500 font-semibold"
-        >
-          Proscom.cl
-        </a>
+    <footer className="bg-gray-950 text-gray-400 border-t border-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-center sm:text-left">
+        <div>
+          <p>
+            &copy; {new Date().getFullYear()}{" "}
+            <span className="text-white font-medium">Legal Firma</span>. Todos los derechos reservados.
+          </p>
+        </div>
+        <div>
+          <p>
+            Sitio desarrollado por{" "}
+            <a
+              href="https://proscom.cl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-red-400 font-semibold transition-colors underline-offset-4 hover:underline"
+            >
+              Proscom.cl
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
